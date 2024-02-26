@@ -24,8 +24,7 @@ match int(input()):
         for elem in lista_sasiadow:
             liczba
         
-        print("tablica indeksow: ", tablica)
-        print("tablica sąsiadow: ", tablica_somsiad)
+
     #---------------------------------------------------------------#
     case 2:
         macierz = [[0] * (n) for _ in range(n)]
