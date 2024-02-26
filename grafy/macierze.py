@@ -22,7 +22,8 @@ match int(input()):
         liczba_krawedzi_z_wierzcholka = [0]
         indeks = 0
         for elem in lista_sasiadow:
-            liczba
+            liczba_krawedzi_z_wierzcholka.append(liczba_krawedzi_z_wierzcholka[indeks]+len(elem))
+            indeks += 1
         
 
     #---------------------------------------------------------------#
