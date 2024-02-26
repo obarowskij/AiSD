@@ -25,6 +25,7 @@ match int(input()):
         print("tablica sąsiadow: ", lista_krawedzi)
     #---------------------------------------------------------------#
     case 2:
+        #AAAAAAAAAAAAA
         macierz = [[0] * (n) for _ in range(n)]
         lista_sasiadow = [[] for _ in range(n)]  
         for i in range(m):
