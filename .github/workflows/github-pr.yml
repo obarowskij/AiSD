@@ -1,0 +1,37 @@
+name: Automatyczny pull request
+
+on:
+  push:
+    branches:
+      - 'testowa' # Nazwa gałęzi, dla której ma być uruchamiane workflow (zmień na swoją gałąź testową)
+
+jobs:
+  create_pull_request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repozytorium
+        uses: actions/checkout@v2
+
+      - name: Utwórz unikalną nazwę gałęzi
+        id: generate_branch_name
+        run: echo "::set-output name=branch_name::nowa-galez-$(date +'%Y%m%d%H%M%S')"
+
+      - name: Utwórz nowy branch
+        run: |
+          git checkout -b ${{ steps.generate_branch_name.outputs.branch_name }}
+          git push origin ${{ steps.generate_branch_name.outputs.branch_name }}
+
+      - name: Utwórz pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ steps.generate_branch_name.outputs.branch_name }}
+          base: main
+          title: Automatyczny pull request
+          body: Automatycznie utworzony pull request z gałęzi testowej do głównej.
+
+      - name: Usuń gałąź po zmergowaniu pull requestu
+        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+        run: |
+          git push --delete origin ${{ steps.generate_branch_name.outputs.branch_name }}
