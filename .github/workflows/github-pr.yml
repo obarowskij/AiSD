@@ -23,6 +23,8 @@ jobs:
           git config --global user.name "obarowskij"
           git checkout -b ${{ steps.generate_branch_name.outputs.branch_name }}
           git push origin ${{ steps.generate_branch_name.outputs.branch_name }}
+	env:
+    	  GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Utwórz pull request
         uses: peter-evans/create-pull-request@v3
