@@ -21,11 +21,15 @@ match int(input()):
         
         liczba_krawedzi_z_wierzcholka = [0]
         indeks = 0
+        lista_krawedzi = []
         for elem in lista_sasiadow:
             liczba_krawedzi_z_wierzcholka.append(liczba_krawedzi_z_wierzcholka[indeks]+len(elem))
             indeks += 1
+            for e in elem:
+                lista_krawedzi.append((e[0],e[1]))
         
-
+        print("tablica indeksow: ", liczba_krawedzi_z_wierzcholka)
+        print("tablica sąsiadow: ", lista_krawedzi)
     #---------------------------------------------------------------#
     case 2:
         macierz = [[0] * (n) for _ in range(n)]
