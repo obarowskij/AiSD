@@ -3,7 +3,7 @@ name: Automatyczny pull request
 on:
   push:
     branches:
-      - 'testowa' # Nazwa gałęzi, dla której ma być uruchamiane workflow (zmień na swoją gałąź testową)
+      - 'testowa'
 
 jobs:
   create_pull_request:
@@ -19,19 +19,25 @@ jobs:
 
       - name: Utwórz nowy branch
         run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
           git checkout -b ${{ steps.generate_branch_name.outputs.branch_name }}
           git push origin ${{ steps.generate_branch_name.outputs.branch_name }}
 
       - name: Utwórz pull request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           branch: ${{ steps.generate_branch_name.outputs.branch_name }}
           base: main
           title: Automatyczny pull request
           body: Automatycznie utworzony pull request z gałęzi testowej do głównej.
 
+  delete_branch:
+    needs: create_pull_request
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    steps:
       - name: Usuń gałąź po zmergowaniu pull requestu
-        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
         run: |
           git push --delete origin ${{ steps.generate_branch_name.outputs.branch_name }}
