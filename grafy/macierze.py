@@ -19,17 +19,10 @@ match int(input()):
         print("lista sasiadow: ", lista_sasiadow)
         print("macierz sasiadow: ", macierz)
         
-        tablica = [0 for _ in range(n + 1)]
-        tablica_somsiad = [[0,0] for _ in range(2*m)]
-        tablica[n] = 2*m
-        k = 0
-        for i in range(n):
-            length = len(lista_sasiadow[i]) + tablica[i]
-            tablica[i+1] = length
-            for j in range(len(lista_sasiadow[i])): 
-                tablica_somsiad[k][0] = lista_sasiadow[i][j][0]
-                tablica_somsiad[k][1]= lista_sasiadow[i][j][1]
-                k += 1
+        liczba_krawedzi_z_wierzcholka = [0]
+        indeks = 0
+        for elem in lista_sasiadow:
+            liczba
         
         print("tablica indeksow: ", tablica)
         print("tablica sąsiadow: ", tablica_somsiad)
