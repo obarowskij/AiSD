@@ -1,28 +1,87 @@
-n = int(input())
-m = int(input())
-lista_sasiadow = []
-lista_sasiadow_s = []
-macierz = []
-macierz_s = []
+# n - liczba wierzcholkow
+# m - liczba krawedzi
+print("podaj liczbe wierzcholkow i krawedzi:")
+n,m = map(int,input().split())
+print("graf(1) czy digraf(2):")
+match int(input()):
+    #---------------------------------------------------------------#
+    case 1:
+        lista_sasiadow = [[] for _ in range(n)]
+        macierz = [[0] * (n) for _ in range(n)]
+        for i in range(m):
+            l = list(map(int,input().split()))
+            if len(l) == 2:
+                l.append(0)
+            lista_sasiadow[l[0]].append((l[1],l[2]))
+            lista_sasiadow[l[1]].append((l[0],l[2]))
+            macierz[l[0]][l[1]] = l[2]
+            macierz[l[1]][l[0]] = l[2]
+        print("lista sasiadow: ", lista_sasiadow)
+        print("macierz sasiadow: ", macierz)
+        
+        summ = sum(len(sublist) for sublist in lista_sasiadow)
+        tablica = [0 for _ in range(n + 1)]
+        tablica_somsiad = [[0,0] for _ in range(summ)]
+        tablica[n] = summ
+        k = 0
+        for i in range(n):
+            length = len(lista_sasiadow[i]) + tablica[i]
+            tablica[i+1] = length
+            for j in range(len(lista_sasiadow[i])): 
+                tablica_somsiad[k][0] = lista_sasiadow[i][j][0]
+                tablica_somsiad[k][1]= lista_sasiadow[i][j][1]
+                k += 1
 
-for _ in range(n):
-    lista_sasiadow.append([])
+        print("tablica indeksow: ", tablica)
+        print("tablica sąsiadow: ", tablica_somsiad)
+    #---------------------------------------------------------------#
+    case 2:
+        macierz_s = [[0] * (n) for _ in range(n)]
+        lista_sasiadow_s = [[] for _ in range(n)]  
+        for i in range(m):
+            l = list(map(int,input().split()))
+            if len(l) == 2:
+                l.append(0)
+            macierz_s[l[0]][l[1]] = l[2]
+            lista_sasiadow_s[l[0]].append((l[1],l[2]))
+        print("lista sasiadow: ", lista_sasiadow_s)
+        print("macierz sasiadow: ", macierz_s)
+        
+        tablica = [0 for _ in range(n + 1)]
+        summ = sum(len(sublist) for sublist in lista_sasiadow_s)
+        tablica[n] = summ
+        tablica_somsiad = [[0,0] for _ in range(summ)]
+        k = 0
+        for i in range(n):
+            length = len(lista_sasiadow_s[i]) + tablica[i]
+            tablica[i+1] = length
+            for j in range(len(lista_sasiadow_s[i])): 
+                tablica_somsiad[k][0] = lista_sasiadow_s[i][j][0]
+                tablica_somsiad[k][1]= lista_sasiadow_s[i][j][1]
+                k += 1
+        print("tablica indeksow: ", tablica)
+        print("tablica sąsiadow: ", tablica_somsiad)
+    #---------------------------------------------------------------#
+    case _:
+        print("nie ma takiego przypadku")
+        
 
-for i in range(n):
-    macierz.append([])
-    for j in range(n):
-        macierz[i].append(0)
 
-for i in range(m):
-    l = list(map(int,input().split()))
-    if len(l) == 2:
-        l.append(0)
-    lista_sasiadow[l[0]].append((l[1],l[2]))
-    lista_sasiadow[l[1]].append((l[0],l[2]))
-    macierz[l[0]][l[1]] = l[2]
-    macierz[l[1]][l[0]] = l[2]
-    macierz_s[l[0]][l[1]] = l[2]
-    lista_sasiadow_s[l[0]].append((l[1],l[2]))
-#graf
-    
-#dgraf
+"""graf
+4 4
+1
+0 3 4
+0 2 2
+2 3 6
+1 3 5
+"""
+
+"""digraf
+4 5
+2
+0 1 4
+0 2 3
+1 3 2
+3 1 1
+3 2 6
+"""
