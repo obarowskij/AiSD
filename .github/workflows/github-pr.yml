@@ -19,7 +19,7 @@ jobs:
 
       - name: Utwórz nowy branch
         run: |
-          git config --global user.email "obarowskij13@gmail.com"
+          git config --global user.email "obarowskijakub13@gmail.com"
           git config --global user.name "obarowskij"
           git checkout -b ${{ steps.generate_branch_name.outputs.branch_name }}
           git push origin ${{ steps.generate_branch_name.outputs.branch_name }}
