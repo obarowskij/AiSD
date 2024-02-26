@@ -31,7 +31,7 @@ match int(input()):
                 tablica_somsiad[k][0] = lista_sasiadow[i][j][0]
                 tablica_somsiad[k][1]= lista_sasiadow[i][j][1]
                 k += 1
-
+        
         print("tablica indeksow: ", tablica)
         print("tablica sąsiadow: ", tablica_somsiad)
     #---------------------------------------------------------------#
