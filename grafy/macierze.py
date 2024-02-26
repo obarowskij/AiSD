@@ -19,10 +19,11 @@ match int(input()):
         print("lista sasiadow: ", lista_sasiadow)
         print("macierz sasiadow: ", macierz)
         
-        liczba_krawedzi = [0]
+        liczba_krawedzi_z_wierzcholka = [0]
         indeks = 0
         for elem in lista_sasiadow:
-            pass
+            liczba
+        
 
     #---------------------------------------------------------------#
     case 2:
