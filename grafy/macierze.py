@@ -19,10 +19,9 @@ match int(input()):
         print("lista sasiadow: ", lista_sasiadow)
         print("macierz sasiadow: ", macierz)
         
-        summ = sum(len(sublist) for sublist in lista_sasiadow)
         tablica = [0 for _ in range(n + 1)]
-        tablica_somsiad = [[0,0] for _ in range(summ)]
-        tablica[n] = summ
+        tablica_somsiad = [[0,0] for _ in range(2*m)]
+        tablica[n] = 2*m
         k = 0
         for i in range(n):
             length = len(lista_sasiadow[i]) + tablica[i]
@@ -36,28 +35,27 @@ match int(input()):
         print("tablica sąsiadow: ", tablica_somsiad)
     #---------------------------------------------------------------#
     case 2:
-        macierz_s = [[0] * (n) for _ in range(n)]
-        lista_sasiadow_s = [[] for _ in range(n)]  
+        macierz = [[0] * (n) for _ in range(n)]
+        lista_sasiadow = [[] for _ in range(n)]  
         for i in range(m):
             l = list(map(int,input().split()))
             if len(l) == 2:
                 l.append(0)
-            macierz_s[l[0]][l[1]] = l[2]
-            lista_sasiadow_s[l[0]].append((l[1],l[2]))
-        print("lista sasiadow: ", lista_sasiadow_s)
-        print("macierz sasiadow: ", macierz_s)
+            macierz[l[0]][l[1]] = l[2]
+            lista_sasiadow[l[0]].append((l[1],l[2]))
+        print("lista sasiadow: ", lista_sasiadow)
+        print("macierz sasiadow: ", macierz)
         
         tablica = [0 for _ in range(n + 1)]
-        summ = sum(len(sublist) for sublist in lista_sasiadow_s)
-        tablica[n] = summ
-        tablica_somsiad = [[0,0] for _ in range(summ)]
+        tablica[n] = m
+        tablica_somsiad = [[0,0] for _ in range(m)]
         k = 0
         for i in range(n):
-            length = len(lista_sasiadow_s[i]) + tablica[i]
+            length = len(lista_sasiadow[i]) + tablica[i]
             tablica[i+1] = length
-            for j in range(len(lista_sasiadow_s[i])): 
-                tablica_somsiad[k][0] = lista_sasiadow_s[i][j][0]
-                tablica_somsiad[k][1]= lista_sasiadow_s[i][j][1]
+            for j in range(len(lista_sasiadow[i])): 
+                tablica_somsiad[k][0] = lista_sasiadow[i][j][0]
+                tablica_somsiad[k][1]= lista_sasiadow[i][j][1]
                 k += 1
         print("tablica indeksow: ", tablica)
         print("tablica sąsiadow: ", tablica_somsiad)
