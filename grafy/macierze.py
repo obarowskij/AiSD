@@ -22,10 +22,8 @@ match int(input()):
         liczba_krawedzi = [0]
         indeks = 0
         for elem in lista_sasiadow:
-            liczba
+            pass
 
-        print("tablica indeksow: ", tablica)
-        print("tablica sąsiadow: ", tablica_somsiad)
     #---------------------------------------------------------------#
     case 2:
         macierz = [[0] * (n) for _ in range(n)]
