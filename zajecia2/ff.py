@@ -3,7 +3,7 @@ from collections import defaultdict
 class Graph:
  
     def __init__(self, graph):
-        self.graph = graph  # residual graph
+        self.graph = graph 
         self. ROW = len(graph)
         # self.COL = len(gr[0])
  
