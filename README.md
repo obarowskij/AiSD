@@ -1,3 +1,3 @@
-Jakub Obarowski - przewodniczący
+Jakub Obarowski - sekretarz
 Marcel Tutak - zastępca przewodniczącego
-Dorota Harasimiuk - sekretarz
+Dorota Harasimiuk - przewodniczacy
