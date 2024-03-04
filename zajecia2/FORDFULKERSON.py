@@ -38,7 +38,6 @@ class Graph:
         max_flow = 0 # There is no flow initially
  
         while self.BFS(source, sink, parent) :
- .
             path_flow = float("Inf")
             s = sink
             while(s !=  source):
