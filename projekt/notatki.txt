@@ -1,0 +1,5 @@
+macierz to swiat w tej macierzy jest ten teskt co jest prostokatem, punkty obserwacyjne to chyba po prostu wymiar tej macierzy
+
+problem 1 
+fabryka nie znajduje sie zapewne na tekscie, plot budujemy na granicy tej macierzy czyli tekst nie moze sie znajdowac na krancu macierzy, tragarze sa losowi za kazdym razem czyli dobieramy jak najwieksza ilosc par (idk lista kto kogo lubi plus gdzie ma rece) wtedy rozdzielamy im kolejke punktow do budowania plotu i liczymy jak najszybsza droge ktora moga tam isc, rogi liczymy jako dlugosc 1 albo po prostu 0.5 skoro mozna je ciac.
+
