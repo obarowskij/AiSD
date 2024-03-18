@@ -10,7 +10,8 @@ Marcel Tutak - zastępca<br /><br />
     <th>L.p</th>
     <th>Specyfikacja problemu (dane i wyniki)</th>
     <th>Do jakich treści w zadaniu odnosi się algorytm</th>
-    <th>Zastosowane struktury danych | Informacje o zastosowanym algorytmie</th>
+    <th>Zastosowane struktury danych</th>
+    <th>Informacje o zastosowanym algorytmie</th>
   </tr>
   <tr>
     <td>1.</td>
