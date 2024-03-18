@@ -14,35 +14,40 @@ Marcel Tutak - zastępca<br /><br />
   </tr>
   <tr>
     <td>1.</td>
-    <td>Dane: tragarze Wynik: tragarze dobrani w pary</td>
+    <td>Dane: tragarze <br />
+     Wynik: tragarze dobrani w pary</td>
     <td>Dobranie tragarzy do transportu odcinków z fabryki</td>
     <td>listy?</td>
     <td>Geometria obliczeniowa na płaszczyźnie</td>
   </tr>
   <tr>
     <td>2.</td>
-    <td>Dane: odcinki, świat(graf, punkty) Wynik: najkrótsza droga</td>
+    <td>Dane: odcinki, świat(graf, punkty) <br />
+     Wynik: najkrótsza droga</td>
     <td>Budowa płotu</td>
     <td>listy?</td>
     <td>Algorytm Jarvisa, Algorytm Grahama</td>
   </tr>
   <tr>
     <td>3.</td>
-    <td>Dane: ciag znakow „a1a2a3…an” Wynik: ciag znakow zamieniony „ba2a3…an”</td>
+    <td>Dane: ciag znakow „a1a2a3…an” <br />
+     Wynik: ciag znakow zamieniony „ba2a3…an”</td>
     <td>Zapisanie melodii w komputerze</td>
     <td>-----------</td>
     <td>-----------</td>
   </tr>
   <tr>
     <td>4.</td>
-    <td>Dane: ciag znakow  Wynik: : ciag znakow zamieniony nie tylko pierwszy znak</td>
+    <td>Dane: ciag znakow  <br />
+     Wynik: : ciag znakow zamieniony nie tylko pierwszy znak</td>
     <td>Inne zmiany w melodii</td>
     <td>-----------</td>
     <td>-----------</td>
   </tr>
   <tr>
     <td>5.</td>
-    <td>Dane: strażnik, droga(graf) Wynik: grafik strażników dla najmniejszej ilości odsłuchań</td>
+    <td>Dane: strażnik, droga(graf) <br />
+     Wynik: grafik strażników dla najmniejszej ilości odsłuchań</td>
     <td>Pilnowanie płotu przed inwazją</td>
     <td>-----------</td>
     <td>-----------</td>
