@@ -1,2 +1,0 @@
-Rozszerzyć algorytm przepływu, tak aby uwzględniał przepustowość wierzchołków podczas wyszukiwania ścieżek powiększających.
-Zastosować techniki przepływu wierzchołkowego, w których przepływ między wierzchołkami jest również brany pod uwagę, co pozwala na manipulowanie przepływem zarówno na krawędziach, jak i wierzchołkach.
