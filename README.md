@@ -66,7 +66,7 @@ Ostatecznie, maksymalny przepływ w tej sieci przepływowej będzie reprezentowa
   </tr>
    <tr>
     <td>7.</td>
-    <td>Dane: Lista strażników wraz z ich datami urlopu<br />
+    <td>Dane: Lista strażników <br />
      Wynik: Harmonogram pracy strażników ustawiany według minimalnej liczby odsłuchań melodii w trakcie pracy</td>
     <td>Potrzeba ochrony płotu</td>
     <td>-----------</td>
