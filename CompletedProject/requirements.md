@@ -1,2 +1,2 @@
-pip install graphviz
+prolly pip install networkx</br>
 pip install plotly
