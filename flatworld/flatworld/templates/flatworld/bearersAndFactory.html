@@ -1,0 +1,47 @@
+{% extends "flatworld/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if message %}
+        <div class="alert alert-info">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <div class="page" id="main">
+        <h1> "Naprawiles melodie", a wśród płaszczaków powstało wielkie poruszenie!</h1>
+        <h3> Z tego co widzisz, plaszczaki zgromadzily się na podejrzaną naradę </h3>
+        {% if factory_exists and bearers_exists %}
+            <form action="/fence" method="get">
+                <button class="btn">Kontynuuj</button>
+            </form>
+        {% endif %}
+    </div>
+    <div class="page">
+        <div class="pageFlex">
+            <div class="dividedPage" id="uno">
+                {% if factory_exists %}
+                    <h3 id="factory"> Fabryka powstała w punkcie {{ factory }} </h3>
+                {% else %}
+                    <button id="generateFactory" class="btn">Płaszczaki budują fabrykę</button>
+                {% endif %}
+            </div>
+            <div class="dividedPage" id="dos">
+                {% if bearers_exists %}
+                    <h3 id="bearers"> Ilość par płaszczaków: {{bearers}} </h3>
+                {% else %}
+                    <h2> W krainie widzisz... </h2>
+                    <input id="inputPoints" type="number" placeholder="liczba plaszczakow wieksza niz 2"></input><br /><br />
+                    <p> Płaszczaki dobiorą się względem: 1. osobowości(ekstrowertyk, introwertyk) i kierunku rąk </p>
+                    <button id="generateBearers" class="btn">Płaszczaki dobierają się w pary</button>
+                {% endif %}
+                
+            </div>       
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'flatworld/bearersAndFactory.js' %}" type="module"></script>
+{% endblock %}

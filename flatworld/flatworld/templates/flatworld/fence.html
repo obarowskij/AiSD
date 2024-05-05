@@ -1,0 +1,16 @@
+{% extends "flatworld/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class = "page">
+        <h1> Płoty wkrótce staną się faktem! </h1>
+        <button id="generateFence" class="btn">Płaszczaki budują płot</button>
+        <h1> bedzie robione tak tak </h1>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'flatworld/fence.js' %}" type="module"></script>
+{% endblock %}

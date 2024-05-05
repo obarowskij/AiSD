@@ -1,0 +1,138 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+    font-family: 'Garamond', serif;
+    background-color: #2f2f2f;
+    color: white;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  .page {
+    padding: 6% 10px 4%; 
+    margin: 10px 70px 0; 
+    font-size: 1.5rem;
+    border-radius: 5px;
+    background-color: #252325;
+    box-shadow: 0 2px 4px rgba(139, 141, 141, 0.5); 
+  }
+  .pageFlex {
+    display: flex;
+  }
+
+  .dividedPage {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+  .gif-container{
+    width: 60%;
+    height: 10%;
+  }
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #2f2f2f; /* dark grey */
+    border-bottom: 3px solid #444; /* slightly lighter grey for contrast */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1.5);
+  }
+  
+  .nav_item{
+    float: left;
+    margin-right: 10px;
+    list-style: none;
+  }
+  
+  .nav_item {
+    display: block;
+    color: #ddd; /* light grey for contrast */
+
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease; /* animate color and background color changes */
+  }
+  
+  .nav_item:hover {
+    background-color: #1f1f1f; /* slightly darker grey for hover effect */
+    color: #fff; /* white text on hover for contrast */
+  }
+  .nav_item_r {
+    display: block;
+    color: #ddd; /* light grey for contrast */
+    float: right;
+    
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease; /* animate color and background color changes */
+  }
+  .nav_item_r:hover{
+    background-color: #1f1f1f; /* slightly darker grey for hover effect */
+    color: #fff; /* white text on hover for contrast */
+  }
+  
+  button {
+    display: inline-block;
+    color: #fff; /* white text for contrast */
+    text-align: center;
+    padding: 12px 24px; /* more padding for a larger button */
+    text-decoration: none;
+    background-color: #2d2e30; /* blue background */
+    border: none; /* remove the border */
+    border-radius: 4px;
+    font-size: 1em; /* larger text */
+    transition: background-color 0.3s ease, color 0.3s ease; /* animate color and background color changes */
+}
+
+button:hover {
+    background-color: #4f5357; /* darker blue for hover effect */
+    color: #fff; /* white text on hover for contrast */
+}
+
+
+
+
+#inputPoints {
+  width: 250px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #f8f8f8;
+  transition: background-color 0.3s ease;
+}
+
+#inputPoints:focus {
+  outline: none;
+  background-color: #e8e8e8;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #4d4d4d;
+  border: 1px solid white;
+  z-index: 1000;
+}
+
+.green-text {
+  color: rgb(6, 179, 6);
+}

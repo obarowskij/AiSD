@@ -1,0 +1,27 @@
+{% extends "flatworld/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if song_exists %}
+        <div class="page">
+            <h1>cos tam</h1>
+        </div>
+    {% else %}
+        <div class = "page" id="modal">
+            <h1>Wyrządzasz psoty dla płaszczakowej piosenki..</h1>
+            <h1> Pieśń: </h1>
+            {% for word in song_words %}
+                {% if word == "br" %}
+                    </br>
+                {% else %}
+                    <button class="btn" id="word-{{ forloop.counter }}">{{ word }}</button>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'flatworld/song.js' %}" type="module"></script>
+{% endblock %}
