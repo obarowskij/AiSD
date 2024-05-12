@@ -1,0 +1,22 @@
+{% extends "flatworld/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class = "page">
+        {% if fence_built %}
+            <h1> Gratulacje! Płotek został zbudowany! </h1>
+            <img src="{{ fence.url }}" alt=""></br>
+            <h2> Koszt budowy: <span class="green-text"> {{ fence.cost }}</span> zł </h2>
+        {% else %}
+            <h1> Płotek wkrótce stanie się faktem! </h1>
+            <img src="{{ fence.url }}" alt=""></br>
+            <button id="generateFence" class="btn">Oblicz koszt budowy płotu</button>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'flatworld/fence.js' %}" type="module"></script>
+{% endblock %}

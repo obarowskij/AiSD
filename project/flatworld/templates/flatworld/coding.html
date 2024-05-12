@@ -1,0 +1,19 @@
+{% extends "flatworld/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class = "page">
+        {% if code_exists %}
+            <h1> cos </h1>
+        {% else %}
+            <h1> Płaszczakowy informatyk agresywnie wklikuje znaczki w komputer.. </h1>
+            <button id="generateCode" class="btn">Generuj kod piosenki</button>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'flatworld/coding.js' %}" type="module"></script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "flatworld/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class = "page">
+        <h1> Zauważyłeś że wśród płaszczaków wyłonili się strażnicy płotu</h1>
+        <button id="generateGuards" class="btn">Zobacz ich harmonogram</button>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'flatworld/guards.js' %}" type="module"></script>
+{% endblock %}
