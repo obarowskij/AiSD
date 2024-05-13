@@ -229,6 +229,8 @@ class SongView(APIView):
             )
         except Adventure.DoesNotExist:
             return render(request, "flatworld/error.html")
+    def post(self, request):
+        pass
         
 class CodingView(APIView):
     def get(self, request):

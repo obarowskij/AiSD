@@ -4,11 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let buttonSmall = document.getElementById('generateSmallWorld');
     let buttonMedium = document.getElementById('generateMediumWorld');
     let buttonBig = document.getElementById('generateBigWorld');
+    let buttonCustom = document.getElementyById('customWorld')
     if (buttonSmall) {
         buttonSmall.addEventListener('click', function() {
             small = true;
             medium = false;
             big = false;
+            custom = false;
             generateWorld();
         });
     }
@@ -17,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             small = false;
             medium = true;
             big = false;
+            custom = false;
             generateWorld();
         });
     }
@@ -25,6 +28,16 @@ document.addEventListener('DOMContentLoaded', function() {
             small = false;
             medium = false;
             big = true;
+            custom = false;
+            generateWorld();
+        });
+    }
+    if (buttonCustom) {
+        buttonBig.addEventListener('click', function() {
+            small = false;
+            medium = false;
+            big = false;
+            custom = true;
             generateWorld();
         });
     }
@@ -32,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 let small = false;
 let medium = false;
 let big = false;
+let custom = false;
 
 function generateWorld(){
     let inputPoints;
@@ -43,6 +57,9 @@ function generateWorld(){
     }
     if (big) {
         inputPoints = Math.floor(Math.random() * (100 - 50 + 1)) + 50;
+    }
+    if (custom) {
+        inputPoints = document.getElementById('inputPoints').value;
     }
     fetch('./', {
         method: 'POST',
