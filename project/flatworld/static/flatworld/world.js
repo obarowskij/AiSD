@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let buttonSmall = document.getElementById('generateSmallWorld');
     let buttonMedium = document.getElementById('generateMediumWorld');
     let buttonBig = document.getElementById('generateBigWorld');
-    let buttonCustom = document.getElementyById('customWorld')
+    let buttonCustom = document.getElementById('customWorld');
     if (buttonSmall) {
         buttonSmall.addEventListener('click', function() {
             small = true;
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     if (buttonCustom) {
-        buttonBig.addEventListener('click', function() {
+        buttonCustom.addEventListener('click', function() {
             small = false;
             medium = false;
             big = false;
@@ -82,7 +82,10 @@ function generateWorld(){
         document.getElementById('generateSmallWorld').remove();
         document.getElementById('generateMediumWorld').remove();
         document.getElementById('generateBigWorld').remove();
-        document.getElementById('inputPointsGenerated').innerHTML = 'Kraina zostala wygenerowana z ' + inputPoints + ' punktow';
+        document.getElementById('inputPoints').remove();
+        document.getElementById('customWorld').remove();
+        document.getElementById('inputPointsGenerated2').remove();
+        document.getElementById('inputPointsGenerated1').innerHTML = 'Kraina zostala wygenerowana z ' + inputPoints + ' punktow';
         const div = document.createElement('div');
         const h3 = document.createElement('h3');
         const button = document.createElement('button');
