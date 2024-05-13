@@ -6,9 +6,10 @@ def horner(word,p):
 
 pattern = input()
 sentence = input()
+change = "sassa"
 p = 89
 
 hs = horner(pattern,p)
 for i in range (len(sentence)-len(pattern)+1):
     if hs == horner(sentence[i:i+len(pattern)],p):
-        print(i)
+        sentence = sentence[:i] + change + sentence[i+len(change)::]
