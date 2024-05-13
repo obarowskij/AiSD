@@ -95,7 +95,7 @@ function generateWorld(){
         div.appendChild(button);
         pageElement.appendChild(div);
         button.addEventListener('click', function() {
-            window.location.href = 'http://127.0.0.1:8000/song/';
+            window.location.href = '/song/';
         });
     })
     .catch(error => console.error(error));
