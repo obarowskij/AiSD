@@ -17,6 +17,7 @@ from .functions.bearers import generate_bearers
 from .functions.visualize_fence import visualize_fence
 from .functions.generate_song import generate_song
 from .functions.calculate_cost import calculate_cost
+from .functions.rabinkarp import rabinkarp
 
 class IndexView(TemplateView):
     def get(self, request):
@@ -229,9 +230,13 @@ class SongView(APIView):
             )
         except Adventure.DoesNotExist:
             return render(request, "flatworld/error.html")
-    def post(self, request):
-        pass
         
+    def post(self, request):
+        to_change = self.request.data.get("word_to_change")
+        rabinkarp(to_change, Adventure.objects.get(id=1).song)
+
+        return 1
+
 class CodingView(APIView):
     def get(self, request):
         try:
