@@ -10,7 +10,7 @@ def calculate_hull(input_points):
         val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y)
         if val == 0:
             return 0
-        return 1 if val > 0 else 2  # Clockwise or counterclockwise
+        return 1 if val > 0 else 2
 
     def calculate_alfa(point, pivot):
         x, y = point.x - pivot.x, point.y - pivot.y
@@ -29,12 +29,14 @@ def calculate_hull(input_points):
             return -1
 
     points = generate(input_points)
+    
+    
     matplotlib.use("Agg")
     plt.figure()
-    # Plot all points
     for i, point in enumerate(points, start=1):
         plt.plot(point.x, point.y, "bo")
         plt.text(point.x, point.y, str(i))
+    
     points_to_return = points
     
     min_y = float("inf")
@@ -70,17 +72,15 @@ def calculate_hull(input_points):
         Graham_stack.push(sorted_polar_points[i])
 
    
-
-    # Transfer points from the Graham_stack to hull_points
     hull_points = []
     while not Graham_stack.is_empty():
         point = Graham_stack.pop()
         hull_points.append(point)
 
-    # Add the first point again to close the hull
     hull_points.append(hull_points[0])
 
-    # Plot the hull points
+
+
     for i in range(len(hull_points) - 1):
         plt.plot(
             [hull_points[i].x, hull_points[i + 1].x],

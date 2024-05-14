@@ -20,7 +20,7 @@ body {
       monospace;
   }
   .page {
-    padding: 6% 10px 4%; 
+    padding: 6% 5% 4%; 
     margin: 10px 70px 0; 
     font-size: 1.5rem;
     border-radius: 5px;
@@ -35,6 +35,7 @@ body {
     width: 50%;
     display: inline-block;
     vertical-align: top;
+    padding-left: 5%;
 }
 
   .gif-container{
@@ -45,8 +46,8 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #2f2f2f; /* dark grey */
-    border-bottom: 3px solid #444; /* slightly lighter grey for contrast */
+    background-color: #2f2f2f;
+    border-bottom: 3px solid #444;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 1.5);
   }
   
@@ -58,49 +59,49 @@ body {
   
   .nav_item {
     display: block;
-    color: #ddd; /* light grey for contrast */
+    color: #ddd;
 
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    transition: color 0.3s ease, background-color 0.3s ease; /* animate color and background color changes */
+    transition: color 0.3s ease, background-color 0.3s ease; 
   }
   
   .nav_item:hover {
-    background-color: #1f1f1f; /* slightly darker grey for hover effect */
-    color: #fff; /* white text on hover for contrast */
+    background-color: #1f1f1f;
+    color: #fff;
   }
   .nav_item_r {
     display: block;
-    color: #ddd; /* light grey for contrast */
+    color: #ddd; 
     float: right;
     
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    transition: color 0.3s ease, background-color 0.3s ease; /* animate color and background color changes */
+    transition: color 0.3s ease, background-color 0.3s ease; 
   }
   .nav_item_r:hover{
-    background-color: #1f1f1f; /* slightly darker grey for hover effect */
-    color: #fff; /* white text on hover for contrast */
+    background-color: #1f1f1f; 
+    color: #fff;
   }
   
   button {
     display: inline-block;
-    color: #fff; /* white text for contrast */
+    color: #fff;
     text-align: center;
-    padding: 12px 24px; /* more padding for a larger button */
+    padding: 12px 24px;
     text-decoration: none;
-    background-color: #2d2e30; /* blue background */
-    border: none; /* remove the border */
+    background-color: #2d2e30;
+    border: none;
     border-radius: 4px;
-    font-size: 1em; /* larger text */
-    transition: background-color 0.3s ease, color 0.3s ease; /* animate color and background color changes */
+    font-size: 1em; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 button:hover {
-    background-color: #4f5357; /* darker blue for hover effect */
-    color: #fff; /* white text on hover for contrast */
+    background-color: #4f5357; 
+    color: #fff
 }
 
 
@@ -135,4 +136,16 @@ button:hover {
 
 .green-text {
   color: rgb(6, 179, 6);
+}
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+table th, table td {
+  border: 1px solid black;
+  padding: 10px;
 }

@@ -17,6 +17,7 @@ from .functions.bearers import generate_bearers
 from .functions.visualize_fence import visualize_fence
 from .functions.generate_song import generate_song
 from .functions.calculate_cost import calculate_cost
+from .functions.code_song import code_song
 
 class IndexView(TemplateView):
     def get(self, request):
@@ -234,17 +235,32 @@ class SongView(APIView):
         
 class CodingView(APIView):
     def get(self, request):
-        try:
+        if "code" in request.GET:
             adventure = Adventure.objects.get(id=1)
-            return render(
-                request,
-                "flatworld/coding.html",
-                {
-                    "coded_song": adventure.coded_song,
-                },
-            )
-        except Adventure.DoesNotExist:
-            return render(request, "flatworld/error.html")
+            song_to_code = adventure.song
+            code, coded_song, uncoded_song = code_song(song_to_code)
+            adventure.code = code
+            adventure.coded_song = coded_song
+            adventure.save()
+            return JsonResponse({
+                "coded_song": coded_song,
+                "code": code,
+                "uncoded_song": uncoded_song,
+            })
+        else:
+            try:
+                adventure = Adventure.objects.get(id=1)
+                return render(
+                    request,
+                    "flatworld/coding.html",
+                    {
+                        "coded_song": adventure.coded_song,
+                    },
+                )
+            except Adventure.DoesNotExist:
+                return render(request, "flatworld/error.html")
+    def post(self, request):
+        pass
 
 
 class GuardsView(APIView):
