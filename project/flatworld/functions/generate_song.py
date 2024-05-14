@@ -3,15 +3,18 @@ from .words import words_list
 
 
 def generate_song():
-    song = ""
+    song = []
     words = words_list()
     repeated_word = random.choice(words)
 
     for _ in range(random.randint(2, 5)):
-        vers = ""
+        vers = []
         for _ in range(random.randint(2, 5)):  
             word = random.choice(words) 
-            vers += word + " " 
-        vers += repeated_word + " " 
-        song += (vers.strip().capitalize() + "\nbr\n")
+            vers.append(word)
+        vers.append(repeated_word)
+        vers = " ".join(vers)
+        song.append(vers)
+        song.append('\n')
+    song = " ".join(song)
     return song

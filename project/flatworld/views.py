@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.http import HttpResponseRedirect
 from io import BytesIO
 from django.core.files import File
 from django.conf import settings
@@ -219,7 +220,9 @@ class SongView(APIView):
                 song = generate_song()
                 adventure.song = song
                 adventure.save()
+                
             song_words = adventure.song.split()
+            print(adventure.song)
             return render(
                 request,
                 "flatworld/song.html",
@@ -235,7 +238,7 @@ class SongView(APIView):
         to_change = self.request.data.get("word_to_change")
         rabinkarp(to_change, Adventure.objects.get(id=1).song)
 
-        return 1
+        return JsonResponse({'message': 'dupa'})
 
 class CodingView(APIView):
     def get(self, request):
