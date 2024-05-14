@@ -43,8 +43,8 @@ function factory() {
 
 function bearers() {
     const inputPoints = document.getElementById('inputPoints').value;
-    if (inputPoints < 2) {
-        alert('Podaj liczbe noszacych wieksza niz 2');
+    if (inputPoints < 7) {
+        alert('Podaj liczbe noszacych wieksza niz 7');
         return;
     }
     fetch('./bearers/', {
@@ -74,7 +74,7 @@ function check() {
         let button = document.createElement('button');
         button.innerHTML = 'Kontynuuj';
         button.addEventListener('click', function() {
-            window.location.href = 'http://127.0.0.1:8000/fence/';
+            window.location.href = '/fence/';
         });
         let page = document.getElementById('main');
         page.appendChild(button);

@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function popup(event) {
     event.preventDefault();
-    fetch('http://127.0.0.1:8000/reset', {
+    fetch('/reset', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', }
         })
@@ -57,7 +57,7 @@ function popup(event) {
                 noButton.textContent = "No";
 
                 yesButton.addEventListener('click', function() {
-                    fetch('http://127.0.0.1:8000/reset/', {
+                    fetch('/reset/', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ function popup(event) {
                         windowPopup.style.zIndex = 1001;
                         document.body.appendChild(windowPopup);
                         setTimeout(function() {
-                            window.location.href = 'http://127.0.0.1:8000';
+                            window.location.href = '/';
                         }, 1000);
                     });
                 });

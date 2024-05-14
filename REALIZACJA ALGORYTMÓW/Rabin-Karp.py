@@ -5,11 +5,10 @@ def horner(word,p):
     return sum%p
 
 pattern = input()
-sentence = input()
-change = "sassa"
+sentence = ['relaksujący podróżuję nauka fantastyczny wygodny nauka', 'nauka dzień miłość nauka', 'tradycyjny piękny nauka planuję kolorowy nauka', 'odpoczywam emocja nauka', 'trenuję oglądam sen studia aktywny nauka']
 p = 89
-
-hs = horner(pattern,p)
-for i in range (len(sentence)-len(pattern)+1):
-    if hs == horner(sentence[i:i+len(pattern)],p):
-        sentence = sentence[:i] + change + sentence[i+len(change)::]
+for line in sentence:
+    hs = horner(pattern,p)
+    for i in range (len(line)-len(pattern)+1):
+        if hs == horner(line[i:i+len(pattern)],p):
+            print(line[i:i+len(pattern)])
