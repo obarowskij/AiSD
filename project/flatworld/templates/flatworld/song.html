@@ -2,13 +2,18 @@
 {% load static %}
 
 {% block body %}
-    {% if song_exists %}
+    {% if changed_song %}
         <div class="page">
-            <h1>cos tam</h1>
+            <h1>Oryginalna Piosenka: </h1>
+            {% for word in song_words %}
+                <h3> {{ word }} </h3>
+            {% endfor %}
+            <h1> Zmieniona Piosenka: </h1>
+            <h3> {{ changed_song }} </h3>
         </div>
     {% else %}
         <div class = "page" id="modal">
-            <h1>Wyrządzasz psoty dla płaszczakowej piosenki..</h1>
+            <h1>Wyrządzasz psoty dla płaszczakowej piosenki...</h1>
             <h1> Pieśń: </h1>
             {% for word in song_words %}
                 {% if word == "\n" %}

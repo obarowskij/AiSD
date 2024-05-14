@@ -229,6 +229,7 @@ class SongView(APIView):
                 {
                     "changed_song_exists": adventure.changed_song,
                     "song_words": song_words,
+                    "changed_song": adventure.changed_song,
                 },
             )
         except Adventure.DoesNotExist:
