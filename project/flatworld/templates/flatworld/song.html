@@ -11,7 +11,7 @@
             <h1>Wyrządzasz psoty dla płaszczakowej piosenki..</h1>
             <h1> Pieśń: </h1>
             {% for word in song_words %}
-                {% if word == "br" %}
+                {% if word == "\n" %}
                     </br>
                 {% else %}
                     <button class="btn" id="word-{{ forloop.counter }}">{{ word }}</button>
