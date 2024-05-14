@@ -32,9 +32,20 @@ function change() {
         .then(response => response.json())
         .then(data => {
             document.body.removeChild(windowPopup);
-            ({ windowPopup, overlay } = createPopup(data.message));
-            windowPopup.style.zIndex = 1001;
-            document.body.appendChild(windowPopup);
+            document.body.removeChild(overlay);
+            let indexes = data.indexes;
+            let new_song = data.changed_song;
+            let h3 = document.createElement('h3');
+            let h32 = document.createElement('h3');
+            h3.style.wordWrap = 'break-word';
+            h32.style.wordWrap = 'break-word';
+            h3.textContent = "Zmieniono słowo na indeksach: " + indexes;
+            h32.textContent = "Nowa piosenka: " + new_song;
+
+            let page = document.querySelector('.page');
+            page.appendChild(h3);
+            page.appendChild(h32);
+
         });
     });
 
