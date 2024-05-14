@@ -21,6 +21,7 @@ def rabinkarp(pattern, sentence):
     splitted.pop()
     indexes = []
     new_song = ''
+    licznik = 0
     for line in splitted:
         line_added = False
         new_line = ""
@@ -29,14 +30,13 @@ def rabinkarp(pattern, sentence):
             if hs == horner(line[i:i+len(pattern)],p):
                 if(naive_check(line[i:i+len(pattern)], pattern)):
                     line_added = True
-                    indexes.append(i)
+                    indexes.append(licznik)
                     if not new_line:
                         new_line = line[:i]+to_change+line[i+len(pattern):]
                     else:
                         new_line = new_line[:i]+to_change+line[i+len(pattern):]
+            licznik+=1
         if not line_added:
             new_line = line
         new_song+=new_line+'\n'
-    print(new_song)
-    print(indexes)
     return indexes, new_song
