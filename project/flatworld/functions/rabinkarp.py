@@ -36,7 +36,15 @@ def rabinkarp(pattern, sentence):
                     else:
                         new_line = new_line[:i]+to_change+line[i+len(pattern):]
             licznik+=1
-        if not line_added:
-            new_line = line
-        new_song+=new_line+'\n'
-    return indexes, new_song
+            
+    word_indexes = []
+    word_counter = 0
+    for line in splitted:
+        words = line.split()
+        for i in range(len(words)):
+            if words[i] == pattern:
+                word_indexes.append(word_counter)
+                words[i] = to_change
+            word_counter += 1
+        new_song += ' '.join(words) + '\n'
+    return indexes, new_song, word_indexes

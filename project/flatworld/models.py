@@ -17,6 +17,7 @@ class Adventure(models.Model):
     )
 
     song = models.CharField(max_length=1255, null=True)
+    song_index = models.JSONField(null=True, blank=True)
     changed_song = models.CharField(max_length=100, null=True)
 
     code = models.JSONField(null=True, blank=True)

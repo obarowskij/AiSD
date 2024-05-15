@@ -220,16 +220,18 @@ class SongView(APIView):
                 song = generate_song()
                 adventure.song = song
                 adventure.save()
-                
-            song_words = adventure.song.split()
-            print(adventure.song)
+                song_words = adventure.song.split()
+            else:
+                song_words = adventure.song.split()
+            indexes = [str(index+1) for index in adventure.song_index] if adventure.song_index else []
+            changed_song = adventure.changed_song.split() if adventure.changed_song else []
             return render(
                 request,
                 "flatworld/song.html",
                 {
-                    "changed_song_exists": adventure.changed_song,
                     "song_words": song_words,
-                    "changed_song": adventure.changed_song,
+                    "changed_song": changed_song,
+                    "indexes": indexes,
                 },
             )
         except Adventure.DoesNotExist:
@@ -238,12 +240,14 @@ class SongView(APIView):
     def post(self, request):
         to_change = self.request.data.get("word_to_change")
         adventure = Adventure.objects.get(id=1)
-        indexes, changed_song = rabinkarp(to_change, adventure.song)
+        indexes, changed_song, word_indexes = rabinkarp(to_change, adventure.song)
         adventure.changed_song = changed_song
+        adventure.song_index = word_indexes
         adventure.save()
         return JsonResponse({
             'indexes': indexes,
             'changed_song': changed_song,
+            'word_indexes': word_indexes,
         })
 
 class CodingView(APIView):

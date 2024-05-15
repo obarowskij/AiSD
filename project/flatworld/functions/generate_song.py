@@ -9,7 +9,7 @@ def generate_song():
 
     for _ in range(random.randint(2, 5)):
         vers = []
-        for _ in range(random.randint(2, 5)):  
+        for _ in range(5):  
             word = random.choice(words) 
             vers.append(word)
         vers.append(repeated_word)

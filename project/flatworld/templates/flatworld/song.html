@@ -4,24 +4,41 @@
 {% block body %}
     {% if changed_song %}
         <div class="page">
-            <h1>Oryginalna Piosenka: </h1>
+            <h1>Piosenka: </h1>  
             {% for word in song_words %}
-                <h3> {{ word }} </h3>
+                {% if forloop.counter|stringformat:"s" in indexes %}
+                    <span class="green-text" style="font-size: 1.17em;"> {{ word }} </span>
+                {% else %}
+                    <span style="font-size: 1.17em;"> {{ word }} </span>
+                {% endif %}
+                {% if forloop.counter|divisibleby:"5" %}
+                    <br>
+                {% endif %}
             {% endfor %}
-            <h1> Zmieniona Piosenka: </h1>
-            <h3> {{ changed_song }} </h3>
+            <h1>Zmieniona piosenka: </h1>
+            {% for word in changed_song %}
+                {% if forloop.counter|stringformat:"s" in indexes %}
+                    <span class="green-text" style="font-size: 1.17em;"> {{ word }} </span>
+                {% else %}
+                    <span style="font-size: 1.17em;"> {{ word }} </span>
+                {% endif %}
+                {% if forloop.counter|divisibleby:"5" %}
+                    <br>
+                {% endif %}
+            {% endfor %}
         </div>
     {% else %}
         <div class = "page" id="modal">
-            <h1>Wyrządzasz psoty dla płaszczakowej piosenki...</h1>
-            <h1> Pieśń: </h1>
-            {% for word in song_words %}
-                {% if word == "\n" %}
-                    </br>
-                {% else %}
+            <div id ="menu">
+                <h1>Wyrządzasz psoty dla płaszczakowej piosenki...</h1>
+                <h1> Pieśń: </h1>
+                {% for word in song_words %}
                     <button class="btn" id="word-{{ forloop.counter }}">{{ word }}</button>
-                {% endif %}
-            {% endfor %}
+                    {% if forloop.counter|divisibleby:"5" %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     {% endif %}
 

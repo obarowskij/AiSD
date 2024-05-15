@@ -34,18 +34,29 @@ function change() {
             document.body.removeChild(windowPopup);
             document.body.removeChild(overlay);
             let indexes = data.indexes;
+            let word_indexes = data.word_indexes;
             let new_song = data.changed_song;
+            document.getElementById('menu').remove();
             let h3 = document.createElement('h3');
             let h32 = document.createElement('h3');
             h3.style.wordWrap = 'break-word';
             h32.style.wordWrap = 'break-word';
             h3.textContent = "Zmieniono słowo na indeksach: " + indexes;
-            h32.textContent = "Nowa piosenka: " + new_song;
-
+            let words = new_song.split(' ');
+            for (let i = 0; i < words.length; i++) {
+                if ((i + 1) % 5 === 0) {
+                    words[i] = words[i] + ' ';
+                }
+                if (word_indexes.includes(i)) {
+                    words[i] = `<span style="color:green;">${words[i]}</span>`;
+                }
+            }
+            new_song = words.join(' ');
+            h32.innerHTML = "Nowa piosenka: <br>" + new_song;
+        
             let page = document.querySelector('.page');
             page.appendChild(h3);
             page.appendChild(h32);
-
         });
     });
 
