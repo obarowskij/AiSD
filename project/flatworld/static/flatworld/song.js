@@ -43,6 +43,7 @@ function change() {
             h32.style.wordWrap = 'break-word';
             h3.textContent = "Zmieniono słowo na indeksach: " + indexes;
             let words = new_song.split(' ');
+            // to nie dziala jakby co xd
             for (let i = 0; i < words.length; i++) {
                 if ((i + 1) % 5 === 0) {
                     words[i] = words[i] + ' ';

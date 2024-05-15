@@ -22,7 +22,7 @@ body {
   .page {
     padding: 6% 5% 4%; 
     margin: 10px 70px 0; 
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     border-radius: 5px;
     background-color: #252325;
     box-shadow: 0 2px 4px rgba(139, 141, 141, 0.5); 
@@ -35,7 +35,8 @@ body {
     width: 50%;
     display: inline-block;
     vertical-align: top;
-    padding-left: 5%;
+    padding: 1% 5%;
+    border: 1px solid #444;
 }
 
   .gif-container{
@@ -147,5 +148,5 @@ table {
 
 table th, table td {
   border: 1px solid black;
-  padding: 10px;
+  padding: 2px 6px;
 }

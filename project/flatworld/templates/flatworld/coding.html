@@ -7,15 +7,18 @@
         {% if code_exists %}
             <h1> cos </h1>
         {% else %}
-            <h1> Płaszczakowy informatyk agresywnie wklikuje znaczki w komputer... </h1>
-            <button id="generateCode" class="btn">Generuj kod piosenki</button>
+            <h1> Płaszczakowy informatyk agresywnie wklikuje znaczki w komputer... </h1> 
+            <div class="pageFlex">
+                <div class="dividedPage" id="left">
+                    <h3> chcesz wygenerować kod istniejącej piosenki? </h3>
+                    <button id="generateCode" class="btn">Generuj kod istniejącej piosenki</button>
+                </div>
+                <div class="dividedPage" id="right">
+                 {#   <h3> chcesz wygenerować własną piosenkę? </h3> #}
+                 {#   <button id="generateNewCode" class="btn">Generuj własną piosenkę</button> #}
+                </div>
+            </div>
         {% endif %}
-    </div>
-    <div class = "page">
-        <div class="pageFlex">
-            <div class="dividedPage" id="left"></div>
-            <div class="dividedPage" id="right"></div>
-        </div> 
     </div>
     
 

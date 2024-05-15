@@ -171,46 +171,6 @@ class BearersView(APIView):
         return JsonResponse({"pairs": pairs})
 
 
-class FenceView(APIView):
-    def get(self, request):
-        try:
-            adventure = Adventure.objects.get(id=1)
-            if "fence" in request.GET:
-                hull_points = adventure.hull_points
-                factory = adventure.factory
-                world_points = adventure.world_points
-                neighbor_of_all_point = adventure.fence_neighbors
-                fence_cost = calculate_cost(world_points, factory, hull_points, neighbor_of_all_point)
-                
-                
-            else:
-                if not adventure.bearers and not adventure.factory:
-                    return render(request, "flatworld/error.html")
-                if not adventure.fence:
-                    hull_points = adventure.hull_points
-                    factory = adventure.factory
-                    world_points = adventure.world_points
-
-                    image_data, neighbors = visualize_fence(world_points, factory, hull_points)
-                    neighbors = {int(key): [int(i) for i in value] for key, value in neighbors.items()}
-                    image_data.seek(0)
-                    filename = "fence_{}.png".format(int(time.time()))
-                    adventure.fence.save(filename, File(image_data))
-                    adventure.fence_neighbors = neighbors
-                    adventure.save()
-                fence_url = adventure.fence
-                return render(request, "flatworld/fence.html", {
-                        "fence_cost": adventure.fence_cost,
-                        "fence": fence_url,
-                        "fence_built": adventure.fence_cost
-                        },
-                )
-        except Adventure.DoesNotExist:
-            return render(request, "flatworld/error.html")
-        
-    def post(self, request):
-        pass
-
 
 class SongView(APIView):
     def get(self, request):
@@ -279,6 +239,46 @@ class CodingView(APIView):
     def post(self, request):
         pass
 
+
+class FenceView(APIView):
+    def get(self, request):
+        try:
+            adventure = Adventure.objects.get(id=1)
+            if "fence" in request.GET:
+                hull_points = adventure.hull_points
+                factory = adventure.factory
+                world_points = adventure.world_points
+                neighbor_of_all_point = adventure.fence_neighbors
+                fence_cost = calculate_cost(world_points, factory, hull_points, neighbor_of_all_point)
+                
+                
+            else:
+                if not adventure.bearers and not adventure.factory:
+                    return render(request, "flatworld/error.html")
+                if not adventure.fence:
+                    hull_points = adventure.hull_points
+                    factory = adventure.factory
+                    world_points = adventure.world_points
+
+                    image_data, neighbors = visualize_fence(world_points, factory, hull_points)
+                    neighbors = {int(key): [int(i) for i in value] for key, value in neighbors.items()}
+                    image_data.seek(0)
+                    filename = "fence_{}.png".format(int(time.time()))
+                    adventure.fence.save(filename, File(image_data))
+                    adventure.fence_neighbors = neighbors
+                    adventure.save()
+                fence_url = adventure.fence
+                return render(request, "flatworld/fence.html", {
+                        "fence_cost": adventure.fence_cost,
+                        "fence": fence_url,
+                        "neighbors": adventure.fence_neighbors, 
+                        },
+                )
+        except Adventure.DoesNotExist:
+            return render(request, "flatworld/error.html")
+        
+    def post(self, request):
+        pass
 
 class GuardsView(APIView):
     def get(self, request):

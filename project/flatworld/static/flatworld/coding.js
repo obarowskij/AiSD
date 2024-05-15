@@ -1,9 +1,14 @@
 import {getCookie} from './flatworld.js';
+import {createPopup} from './flatworld.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     let button = document.getElementById('generateCode');
     if(button){
         button.addEventListener('click', code);
+    }
+    let additionalbutton = document.getElementById('generateNewCode');
+    if(additionalbutton){
+        additionalbutton.addEventListener('click', openinput);
     }
 });
 
@@ -74,4 +79,37 @@ function code(){
         
     })
     .catch(error => console.error('Error:', error));
+}
+
+function openinput(){
+    let windowPopup, overlay;
+    ({ windowPopup, overlay } = createPopup("Napisz własną piosenkę: "));
+    windowPopup.style.zIndex = 1001;
+    windowPopup.style.width = '80%'; // Increase the width of the popup
+    windowPopup.style.maxWidth = '800px'; // Set a maximum width if necessary
+    document.body.appendChild(windowPopup);
+    let input = document.createElement('input');
+    input.type = 'text';
+    input.id = 'input';
+    input.style.width = '80%'; 
+    input.style.margin = '0 auto';
+    input.style.display = 'block';
+    windowPopup.appendChild(input);
+
+    let button = document.createElement('button');
+    button.textContent = "Sprawdź";
+    button.style.display = 'block';
+    button.style.margin = '0 auto';
+    button.style.marginTop = '10px';
+    
+    windowPopup.appendChild(button);
+    button.addEventListener('click', function() {
+        code();
+        if (document.body.contains(windowPopup)) {
+            document.body.removeChild(windowPopup);
+        }
+        if (document.body.contains(overlay)) {
+            document.body.removeChild(overlay);
+        }
+    });
 }

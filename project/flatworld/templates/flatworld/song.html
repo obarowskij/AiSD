@@ -5,27 +5,31 @@
     {% if changed_song %}
         <div class="page">
             <h1>Piosenka: </h1>  
-            {% for word in song_words %}
-                {% if forloop.counter|stringformat:"s" in indexes %}
-                    <span class="green-text" style="font-size: 1.17em;"> {{ word }} </span>
-                {% else %}
-                    <span style="font-size: 1.17em;"> {{ word }} </span>
-                {% endif %}
-                {% if forloop.counter|divisibleby:"5" %}
-                    <br>
-                {% endif %}
-            {% endfor %}
+            <div class="dividedPage">
+                {% for word in song_words %}
+                    {% if forloop.counter|stringformat:"s" in indexes %}
+                        <span class="green-text" style="font-size: 1.10em;"> {{ word }} </span>
+                    {% else %}
+                        <span style="font-size: 1.10em;"> {{ word }} </span>
+                    {% endif %}
+                    {% if forloop.counter|divisibleby:"5" %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+            </div>
             <h1>Zmieniona piosenka: </h1>
-            {% for word in changed_song %}
-                {% if forloop.counter|stringformat:"s" in indexes %}
-                    <span class="green-text" style="font-size: 1.17em;"> {{ word }} </span>
-                {% else %}
-                    <span style="font-size: 1.17em;"> {{ word }} </span>
-                {% endif %}
-                {% if forloop.counter|divisibleby:"5" %}
-                    <br>
-                {% endif %}
-            {% endfor %}
+            <div class="dividedPage">
+                {% for word in changed_song %}
+                    {% if forloop.counter|stringformat:"s" in indexes %}
+                        <span class="green-text" style="font-size: 1.10em;"> {{ word }} </span>
+                    {% else %}
+                        <span style="font-size: 1.10em;"> {{ word }} </span>
+                    {% endif %}
+                    {% if forloop.counter|divisibleby:"5" %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     {% else %}
         <div class = "page" id="modal">
