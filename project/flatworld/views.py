@@ -11,6 +11,7 @@ from django.core.files import File
 from django.conf import settings
 import os
 import time
+from django.core.files.base import ContentFile
 
 from .functions.calculate_hull import calculate_hull
 from .functions.factory import generate_factory
@@ -200,7 +201,7 @@ class SongView(APIView):
     def post(self, request):
         to_change = self.request.data.get("word_to_change")
         adventure = Adventure.objects.get(id=1)
-        indexes, changed_song, word_indexes = rabinkarp(to_change, adventure.song)
+        indexes, changed_song, word_indexes, changed_word = rabinkarp(to_change, adventure.song)
         adventure.changed_song = changed_song
         adventure.song_index = word_indexes
         adventure.save()
@@ -208,6 +209,7 @@ class SongView(APIView):
             'indexes': indexes,
             'changed_song': changed_song,
             'word_indexes': word_indexes,
+            'changed_word': changed_word,
         })
 
 class CodingView(APIView):
@@ -220,24 +222,39 @@ class CodingView(APIView):
             adventure.coded_song = coded_song
             adventure.save()
             return JsonResponse({
-                "coded_song": coded_song,
-                "code": code,
-                "uncoded_song": uncoded_song,
+                'coded_song': coded_song,
+                'code': code,
+                'uncoded_song': uncoded_song,
             })
         else:
             try:
                 adventure = Adventure.objects.get(id=1)
+                if not adventure.song:
+                    return render(request, "flatworld/error.html")
+                newline = "\n"
                 return render(
                     request,
                     "flatworld/coding.html",
                     {
-                        "coded_song": adventure.coded_song,
+                        'code': adventure.code,
+                        'newline': "\n",
+                        'coded_song': adventure.coded_song,
                     },
                 )
             except Adventure.DoesNotExist:
                 return render(request, "flatworld/error.html")
     def post(self, request):
-        pass
+        adventure = Adventure.objects.get(id=1)
+        song_to_code = request.data.get("song_to_code")  # Dodajemy wcięcie tutaj
+        code, coded_song, uncoded_song = code_song(song_to_code)
+        adventure.code = code
+        adventure.coded_song = coded_song
+        adventure.save()
+        return JsonResponse({
+            "coded_song": coded_song,
+            "code": code,
+            "uncoded_song": uncoded_song,
+        })
 
 
 class FenceView(APIView):
@@ -253,7 +270,7 @@ class FenceView(APIView):
                 
                 
             else:
-                if not adventure.bearers and not adventure.factory:
+                if not adventure.bearers or not adventure.factory:
                     return render(request, "flatworld/error.html")
                 if not adventure.fence:
                     hull_points = adventure.hull_points
@@ -262,9 +279,8 @@ class FenceView(APIView):
 
                     image_data, neighbors = visualize_fence(world_points, factory, hull_points)
                     neighbors = {int(key): [int(i) for i in value] for key, value in neighbors.items()}
-                    image_data.seek(0)
                     filename = "fence_{}.png".format(int(time.time()))
-                    adventure.fence.save(filename, File(image_data))
+                    adventure.fence.save(filename, ContentFile(image_data))  # Use ContentFile here
                     adventure.fence_neighbors = neighbors
                     adventure.save()
                 fence_url = adventure.fence

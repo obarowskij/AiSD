@@ -5,7 +5,7 @@
     {% if changed_song %}
         <div class="page">
             <h1>Piosenka: </h1>  
-            <div class="dividedPage">
+            <div class="dividedPage" id='allcontent'>
                 {% for word in song_words %}
                     {% if forloop.counter|stringformat:"s" in indexes %}
                         <span class="green-text" style="font-size: 1.10em;"> {{ word }} </span>

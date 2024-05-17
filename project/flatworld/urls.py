@@ -19,6 +19,6 @@ urlpatterns = [
     path("factory/bearers/", views.BearersView.as_view(), name="bearers"),
     path("fence/", views.FenceView.as_view(), name="fence"),
     path("song/", views.SongView.as_view(), name="song"),
-    path("coding/", views.CodingView.as_view(), name="conding"),
+    path("coding/", views.CodingView.as_view(), name="coding"),
     path("guards/", views.GuardsView.as_view(), name="Guards"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

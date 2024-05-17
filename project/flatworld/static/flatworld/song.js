@@ -36,19 +36,18 @@ function change() {
             let indexes = data.indexes;
             let word_indexes = data.word_indexes;
             let new_song = data.changed_song;
+            let changed_word = data.changed_word;
             document.getElementById('menu').remove();
             let h3 = document.createElement('h3');
             let h32 = document.createElement('h3');
-            h3.style.wordWrap = 'break-word';
+            h32.className = 'borderPage';
             h32.style.wordWrap = 'break-word';
-            h3.textContent = "Zmieniono słowo na indeksach: " + indexes;
-            let words = new_song.split(' ');
-            // to nie dziala jakby co xd
+            h3.textContent = "Zmieniono słowo na indeksach: " + indexes + "\nSą to słowa o indeksach: " + word_indexes;
+            let words = new_song.split(/\s+/);
             for (let i = 0; i < words.length; i++) {
-                if ((i + 1) % 5 === 0) {
-                    words[i] = words[i] + ' ';
-                }
-                if (word_indexes.includes(i)) {
+                if ((i+1) % 5 === 0) {
+                    words[i] = words[i] + ' <br>';
+                } else if(words[i].trim() === changed_word.trim()) {
                     words[i] = `<span style="color:green;">${words[i]}</span>`;
                 }
             }
@@ -56,6 +55,7 @@ function change() {
             h32.innerHTML = "Nowa piosenka: <br>" + new_song;
         
             let page = document.querySelector('.page');
+            
             page.appendChild(h3);
             page.appendChild(h32);
         });

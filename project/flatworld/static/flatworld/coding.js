@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     let additionalbutton = document.getElementById('generateNewCode');
     if(additionalbutton){
-        additionalbutton.addEventListener('click', openinput);
+        additionalbutton.addEventListener('click', customcode);
     }
 });
 
@@ -23,16 +23,39 @@ function code(){
     fetch(url)
     .then(response => response.json())
     .then(data =>{
-        let code = data.code;
-        let uncoded_song = data.uncoded_song;
-        let coded_song = data.coded_song;
-        let page = document.querySelector('.page');
-        let leftpage = document.getElementById('left');
-        let rightpage = document.getElementById('right');
-        let h3Element1 = document.createElement('h3');
-        h3Element1.style.wordWrap = 'break-word';
-        h3Element1.innerHTML = "Zakodowana piosenka brzmi: " + coded_song;
-        page.appendChild(h3Element1);
+        print(data);
+    });
+}
+
+function customcode(){
+    fetch('./', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+            'song_to_code': document.getElementById('inputText').value
+        })
+    })
+    .then(response => response.json())
+    .then(data =>{
+        print(data);
+    });
+}
+
+function print(data){
+    let code = data.code;
+    let uncoded_song = data.uncoded_song;
+    let coded_song = data.coded_song;
+    let page = document.querySelector('.page');
+    let leftpage = document.getElementById('left');
+    let rightpage = document.getElementById('right');
+    let h3Element1 = document.createElement('h3');
+    h3Element1.style.wordBreak = 'break-all';
+    h3Element1.innerHTML = "Zakodowana piosenka brzmi: " + coded_song;
+    h3Element1.className = 'borderPage';
+    rightpage.appendChild(h3Element1);
 
         let table = document.createElement('table');
         let thead = document.createElement('thead');
@@ -68,48 +91,18 @@ function code(){
         }
         table.appendChild(tbody);
 
-        // Append the table to the page
         leftpage.appendChild(table);
 
         let h3Element3 = document.createElement('h3');
         h3Element3.innerHTML = "Informatyk od razu próbował odkodować piosenkę, sprawdź czy wyszło mu to co zakodował! <br>" + uncoded_song;
         rightpage.appendChild(h3Element3);
 
+        
+        document.getElementById('text1').remove();
+        document.getElementById('text2').remove();
+        document.getElementById('inputText').remove();
+        document.getElementById('generateNewCode').remove();
         document.getElementById('generateCode').remove();
         
-    })
-    .catch(error => console.error('Error:', error));
 }
 
-function openinput(){
-    let windowPopup, overlay;
-    ({ windowPopup, overlay } = createPopup("Napisz własną piosenkę: "));
-    windowPopup.style.zIndex = 1001;
-    windowPopup.style.width = '80%'; // Increase the width of the popup
-    windowPopup.style.maxWidth = '800px'; // Set a maximum width if necessary
-    document.body.appendChild(windowPopup);
-    let input = document.createElement('input');
-    input.type = 'text';
-    input.id = 'input';
-    input.style.width = '80%'; 
-    input.style.margin = '0 auto';
-    input.style.display = 'block';
-    windowPopup.appendChild(input);
-
-    let button = document.createElement('button');
-    button.textContent = "Sprawdź";
-    button.style.display = 'block';
-    button.style.margin = '0 auto';
-    button.style.marginTop = '10px';
-    
-    windowPopup.appendChild(button);
-    button.addEventListener('click', function() {
-        code();
-        if (document.body.contains(windowPopup)) {
-            document.body.removeChild(windowPopup);
-        }
-        if (document.body.contains(overlay)) {
-            document.body.removeChild(overlay);
-        }
-    });
-}

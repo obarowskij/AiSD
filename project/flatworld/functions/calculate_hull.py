@@ -92,6 +92,7 @@ def calculate_hull(input_points):
     
     buf = io.BytesIO()
     plt.savefig(buf, format="png")
+    plt.close()
 
     image_data = buf.getvalue()
     world_points = [(point.x, point.y) for point in points_to_return]
