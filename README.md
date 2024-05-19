@@ -1,12 +1,29 @@
-<h2>Zespół nr: 1 </h2>
+<h1>Zespół nr: 1 </h1>
 <b>
 Skład zespołu wraz z funkcjami:<br />
 Jakub Obarowski – przywódca<br />
 Dorota Harasimiuk - sekretarz<br />
 Marcel Tutak - zastępca<br /><br />
 ![kraina](https://github.com/obarowskij/AiSD/assets/146991219/70d9dfba-e964-468b-bb6d-59a82b36d572)
-(obraz autorstwa Doroty Harasimiuk)
 
+<h2>Odpalenie projektu</h2>
+<h4> Krok 1.</h4>
+<p> pobranie paczki requirements</p>
+<pre><code>
+ pip install -r requirements.txt
+</code></pre> 
+<h4> Krok 2.</h4>
+<p>Uruchomienie aplikacji </p>
+<pre><code>
+ python manage.py runserver
+</code></pre>
+Serwer uruchomi się domyślnie pod adresem http://127.0.0.1:8000
+
+<h4>Uruchomienie Testów</h4>
+<pre><code>
+ pytest
+</code></pre>
+<h2> Dokumentacja</h2>
  <table>
   <tr>
     <th>L.p</th>
@@ -74,14 +91,4 @@ Ostatecznie, maksymalny przepływ w tej sieci przepływowej będzie reprezentowa
   </tr>
 </table> 
 <br />
-input krainy: GRAF - lista punktów <br />
-tragarz: 1) rece: przod/tyl 2) lista kogo lubi (wiemy ilu wygenerowalismy tutaj)<br />
-strażnik: 1) energia 2) urlop?<br />
-Potencjalnie dodać płaszczaki klase z której te dwie dziedziczą i dodać imiona(jakąś identyfikacje)<br /><br />
-<h1> Sekcja Problemów z problemami....... </h1>
-
-<h2> Problem 4 </h2><br />
-Informatyk próbował już zapisać te melodie na kompa tylko mu nie starczylo miejsca. zakładamy że znamy te melodie? i pewnie też znamy aktualną popsutą piosenkę. Więc po co nam wyszukiwanie wzorca. idk do zapytania <br/ >
-clueless???<br />
-</b>
 
