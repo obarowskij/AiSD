@@ -5,7 +5,6 @@ from django.http import JsonResponse
 from django.views import View
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.http import HttpResponseRedirect
 from io import BytesIO
 from django.core.files import File
 from django.conf import settings
@@ -13,14 +12,15 @@ import os
 import time
 from django.core.files.base import ContentFile
 
-from .functions.calculate_hull import calculate_hull
+from .functions.algorithm_graham import calculate_hull
 from .functions.factory import generate_factory
 from .functions.bearers import generate_bearers
-from .functions.visualize_fence import visualize_fence
+from .functions.generate_fence import visualize_fence
 from .functions.generate_song import generate_song
-from .functions.calculate_cost import calculate_cost
-from .functions.rabinkarp import rabinkarp
-from .functions.code_song import code_song
+from .functions.algorithm_dinic import calculate_cost
+from .functions.algorithm_rabinkarp import rabinkarp
+from .functions.algorithm_huffman import code_song
+
 
 class IndexView(TemplateView):
     def get(self, request):
@@ -30,6 +30,7 @@ class IndexView(TemplateView):
             "flatworld/index.html",
             {"adventure_exists": adventure_exists},
         )
+
 
 class ContinueView(View):
     def get(self, request):
@@ -127,7 +128,7 @@ class FactoryView(APIView):
         try:
             adventure = Adventure.objects.get(id=1)
             # if not adventure.song:
-                # return render(request, "flatworld/error.html")
+            # return render(request, "flatworld/error.html")
             return render(
                 request,
                 "flatworld/bearersAndFactory.html",
@@ -172,7 +173,6 @@ class BearersView(APIView):
         return JsonResponse({"pairs": pairs})
 
 
-
 class SongView(APIView):
     def get(self, request):
         try:
@@ -184,8 +184,16 @@ class SongView(APIView):
                 song_words = adventure.song.split()
             else:
                 song_words = adventure.song.split()
-            indexes = [str(index+1) for index in adventure.song_index] if adventure.song_index else []
-            changed_song = adventure.changed_song.split() if adventure.changed_song else []
+            indexes = (
+                [str(index + 1) for index in adventure.song_index]
+                if adventure.song_index
+                else []
+            )
+            changed_song = (
+                adventure.changed_song.split()
+                if adventure.changed_song
+                else []
+            )
             return render(
                 request,
                 "flatworld/song.html",
@@ -197,20 +205,25 @@ class SongView(APIView):
             )
         except Adventure.DoesNotExist:
             return render(request, "flatworld/error.html")
-        
+
     def post(self, request):
         to_change = self.request.data.get("word_to_change")
         adventure = Adventure.objects.get(id=1)
-        indexes, changed_song, word_indexes, changed_word = rabinkarp(to_change, adventure.song)
+        indexes, changed_song, word_indexes, changed_word = rabinkarp(
+            to_change, adventure.song
+        )
         adventure.changed_song = changed_song
         adventure.song_index = word_indexes
         adventure.save()
-        return JsonResponse({
-            'indexes': indexes,
-            'changed_song': changed_song,
-            'word_indexes': word_indexes,
-            'changed_word': changed_word,
-        })
+        return JsonResponse(
+            {
+                "indexes": indexes,
+                "changed_song": changed_song,
+                "word_indexes": word_indexes,
+                "changed_word": changed_word,
+            }
+        )
+
 
 class CodingView(APIView):
     def get(self, request):
@@ -218,43 +231,51 @@ class CodingView(APIView):
             adventure = Adventure.objects.get(id=1)
             song_to_code = adventure.song
             code, coded_song, uncoded_song = code_song(song_to_code)
+            print(uncoded_song)
             adventure.code = code
             adventure.coded_song = coded_song
+            adventure.uncoded_song = uncoded_song
             adventure.save()
-            return JsonResponse({
-                'coded_song': coded_song,
-                'code': code,
-                'uncoded_song': uncoded_song,
-            })
+            return JsonResponse(
+                {
+                    "coded_song": coded_song,
+                    "code": code,
+                    "uncoded_song": uncoded_song,
+                }
+            )
         else:
             try:
                 adventure = Adventure.objects.get(id=1)
                 if not adventure.song:
                     return render(request, "flatworld/error.html")
-                newline = "\n"
                 return render(
                     request,
                     "flatworld/coding.html",
                     {
-                        'code': adventure.code,
-                        'newline': "\n",
-                        'coded_song': adventure.coded_song,
+                        "uncoded_song": adventure.uncoded_song,
+                        "code": adventure.code,
+                        "newline": "\n",
+                        "coded_song": adventure.coded_song,
                     },
                 )
             except Adventure.DoesNotExist:
                 return render(request, "flatworld/error.html")
+
     def post(self, request):
         adventure = Adventure.objects.get(id=1)
-        song_to_code = request.data.get("song_to_code")  # Dodajemy wcięcie tutaj
+        song_to_code = request.data.get("song_to_code")
         code, coded_song, uncoded_song = code_song(song_to_code)
         adventure.code = code
         adventure.coded_song = coded_song
+        adventure.uncoded_song = uncoded_song
         adventure.save()
-        return JsonResponse({
-            "coded_song": coded_song,
-            "code": code,
-            "uncoded_song": uncoded_song,
-        })
+        return JsonResponse(
+            {
+                "coded_song": coded_song,
+                "code": code,
+                "uncoded_song": uncoded_song,
+            }
+        )
 
 
 class FenceView(APIView):
@@ -266,9 +287,10 @@ class FenceView(APIView):
                 factory = adventure.factory
                 world_points = adventure.world_points
                 neighbor_of_all_point = adventure.fence_neighbors
-                fence_cost = calculate_cost(world_points, factory, hull_points, neighbor_of_all_point)
-                
-                
+                fence_cost = calculate_cost(
+                    world_points, factory, hull_points, neighbor_of_all_point
+                )
+
             else:
                 if not adventure.bearers or not adventure.factory:
                     return render(request, "flatworld/error.html")
@@ -277,24 +299,33 @@ class FenceView(APIView):
                     factory = adventure.factory
                     world_points = adventure.world_points
 
-                    image_data, neighbors = visualize_fence(world_points, factory, hull_points)
-                    neighbors = {int(key): [int(i) for i in value] for key, value in neighbors.items()}
+                    image_data, neighbors = visualize_fence(
+                        world_points, factory, hull_points
+                    )
+                    neighbors = {
+                        int(key): [int(i) for i in value]
+                        for key, value in neighbors.items()
+                    }
                     filename = "fence_{}.png".format(int(time.time()))
-                    adventure.fence.save(filename, ContentFile(image_data))  # Use ContentFile here
+                    adventure.fence.save(filename, ContentFile(image_data))
                     adventure.fence_neighbors = neighbors
                     adventure.save()
                 fence_url = adventure.fence
-                return render(request, "flatworld/fence.html", {
+                return render(
+                    request,
+                    "flatworld/fence.html",
+                    {
                         "fence_cost": adventure.fence_cost,
                         "fence": fence_url,
-                        "neighbors": adventure.fence_neighbors, 
-                        },
+                        "neighbors": adventure.fence_neighbors,
+                    },
                 )
         except Adventure.DoesNotExist:
             return render(request, "flatworld/error.html")
-        
+
     def post(self, request):
         pass
+
 
 class GuardsView(APIView):
     def get(self, request):

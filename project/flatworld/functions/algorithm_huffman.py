@@ -1,29 +1,29 @@
-
-
 def code_song(text):
-    #kodowanie
-    
+    # kodowanie
+
     length = len(text)
     frequency = {}
 
     for elem in text:
         if elem not in frequency:
             frequency[elem] = text.count(elem) / length
-    frequency = dict(sorted(frequency.items(), key=lambda x:x[1], reverse=True))
+    frequency = dict(
+        sorted(frequency.items(), key=lambda x: x[1], reverse=True)
+    )
     code = {}
     count = ""
     for elem in frequency:
         if elem == list(frequency)[-1]:
-            code.update({elem:count})
+            code.update({elem: count})
         else:
-            temp = "".join([count, '0'])
+            temp = "".join([count, "0"])
             code[elem] = temp
-            count = "".join(['1', count])
+            count = "".join(["1", count])
     coded_text = ""
     for letter in text:
         coded_text = "".join([coded_text, code[letter]])
 
-    #dekodowanie
+    # dekodowanie
     extract = ""
     uncoded_text = ""
     for elem in coded_text:
@@ -34,5 +34,5 @@ def code_song(text):
                     uncoded_text = "".join([uncoded_text, key])
                     extract = ""
                     break
-    
+
     return code, coded_text, uncoded_text

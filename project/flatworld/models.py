@@ -22,6 +22,7 @@ class Adventure(models.Model):
 
     code = models.JSONField(null=True, blank=True)
     coded_song = models.CharField(max_length=100, null=True)
+    uncoded_song = models.CharField(max_length=100, null=True)
 
     guards = models.JSONField(null=True, blank=True)
     schedule = models.JSONField(null=True, blank=True)

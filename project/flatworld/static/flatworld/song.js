@@ -42,7 +42,7 @@ function change() {
             let h32 = document.createElement('h3');
             h32.className = 'borderPage';
             h32.style.wordWrap = 'break-word';
-            h3.textContent = "Zmieniono słowo na indeksach: " + indexes + "\nSą to słowa o indeksach: " + word_indexes;
+            h3.textContent = "Zmieniono słowo na indeksach LITER: " + indexes + "\nSą to SŁOWA o indeksach: " + word_indexes;
             let words = new_song.split(/\s+/);
             for (let i = 0; i < words.length; i++) {
                 if ((i+1) % 5 === 0) {

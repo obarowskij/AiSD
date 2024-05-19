@@ -1,44 +1,55 @@
-from .models import Stack
+from .models import Stack, Point
 import matplotlib.pyplot as plt
 import matplotlib
-from .world_generate import generate
 import io
+from random import randint
+
+
+def generate(input_points):
+    points = []
+    for _ in range(input_points):
+        x = randint(-200, 200)
+        y = randint(-200, 200)
+        points.append(Point(x, y))
+    print(points)
+    return points
+
+
+def det(p, q, r):
+    val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y)
+    if val == 0:
+        return 0
+    return 1 if val > 0 else 2
+
+
+def calculate_alfa(point, pivot):
+    x, y = point.x - pivot.x, point.y - pivot.y
+    d = abs(x) + abs(y)
+    if d == 0:
+        return 0
+    if x >= 0 and y >= 0:
+        return y / d
+    elif x < 0 and y >= 0:
+        return 2 - y / d
+    elif x <= 0 and y < 0:
+        return 2 + abs(y) / d
+    elif x >= 0 and y < 0:
+        return 4 - abs(y) / d
+    else:
+        return -1
 
 
 def calculate_hull(input_points):
-    def det(p, q, r):
-        val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y)
-        if val == 0:
-            return 0
-        return 1 if val > 0 else 2
-
-    def calculate_alfa(point, pivot):
-        x, y = point.x - pivot.x, point.y - pivot.y
-        d = abs(x) + abs(y)
-        if d == 0:
-            return 0
-        if x >= 0 and y >= 0:
-            return y / d
-        elif x < 0 and y >= 0:
-            return 2 - y / d
-        elif x <= 0 and y < 0:
-            return 2 + abs(y) / d
-        elif x >= 0 and y < 0:
-            return 4 - abs(y) / d
-        else:
-            return -1
-
     points = generate(input_points)
-    
-    
+
     matplotlib.use("Agg")
     plt.figure()
     for i, point in enumerate(points, start=1):
         plt.plot(point.x, point.y, "bo")
         plt.text(point.x, point.y, str(i))
-    
+
     points_to_return = points
-    
+
     min_y = float("inf")
     min_index = -1
     for i, point in enumerate(points):
@@ -71,15 +82,12 @@ def calculate_hull(input_points):
             Graham_stack.pop()
         Graham_stack.push(sorted_polar_points[i])
 
-   
     hull_points = []
     while not Graham_stack.is_empty():
         point = Graham_stack.pop()
         hull_points.append(point)
 
     hull_points.append(hull_points[0])
-
-
 
     for i in range(len(hull_points) - 1):
         plt.plot(
@@ -89,7 +97,7 @@ def calculate_hull(input_points):
         )
     for i, point in enumerate(hull_points, start=1):
         plt.plot(point.x, point.y, "go")
-    
+
     buf = io.BytesIO()
     plt.savefig(buf, format="png")
     plt.close()

@@ -29,6 +29,11 @@ class Point:
 
     __repr__ = __str__
 
+    def __eq__(self, other):
+        if isinstance(other, Point):
+            return self.x == other.x and self.y == other.y
+        return False
+
 
 class inhabitants:
     def __init__(self, id):
