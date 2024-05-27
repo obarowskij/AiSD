@@ -1,0 +1,2 @@
+1. Grahama - zmienić sortowanie biegunowe, aby otrzymać złozoność O(n logn). 
+MOżna skorzystać z wbudowanego sortowania i przeciązyc operator porównania
